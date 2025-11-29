@@ -4,12 +4,11 @@ import ListItem from "./ListItem";
 
 const List = () => {
   const [input, setInput] = useState("");
-  const [item, setItem] = useState(["First Element"]);
+  const [items, setItems] = useState([]);
 
-  const onClickHandler = (text) => {
-    const newElement = text;
-    const updatedElement = [...item, newElement];
-    setItem(updatedElement);
+  const onClickHandler = (input) => {
+    const updatedElement = [...items, input];
+    setItems(updatedElement);
     setInput("");
   };
 
@@ -18,15 +17,28 @@ const List = () => {
     setInput(value);
   };
 
+  const onEnterHandler = (e) => {
+    if (e.key === "Enter") {
+      const updatedElement = [...items, input];
+      setItems(updatedElement);
+      setInput("");
+    }
+  };
+
   return (
     <>
-      <input onChange={onChangeHandler} value={input} />
+      <h3>{items.length}</h3>
+      <input
+        onKeyDown={onEnterHandler}
+        onChange={onChangeHandler}
+        value={input}
+      />
       <ul>
-        {item.map((element, index) => (
+        {items.map((element, index) => (
           <ListItem element={element} index={index} />
         ))}
       </ul>
-      <button onClick={() => onClickHandler(input)}>Add new element</button>
+      <button onClick={() => onClickHandler(input)}>Add TO DO</button>
     </>
   );
 };

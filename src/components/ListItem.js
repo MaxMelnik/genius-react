@@ -1,9 +1,5 @@
 const ListItem = (props) => {
-  return (
-    <li key={props.index}>
-      {props.element} {props.index}
-    </li>
-  );
+  return <li key={props.index}>{props.element}</li>;
 };
 
 export default ListItem;
