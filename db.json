@@ -1,0 +1,28 @@
+{
+  "contacts": [
+    {
+      "id": 1,
+      "name": "Harry",
+      "lastname": "Potter",
+      "about": "Lorem ipsum dolor sit amet"
+    },
+    {
+      "id": 2,
+      "name": "Luke",
+      "lastname": "Skywalker",
+      "about": "May the force be with you"
+    },
+    {
+      "name": "Robert",
+      "lastname": "California",
+      "about": "I am the Lizardking",
+      "id": 3
+    },
+    {
+      "name": "Robert",
+      "lastname": "California",
+      "about": "I am the Lizardking",
+      "id": 4
+    }
+  ]
+}
