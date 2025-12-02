@@ -1,0 +1,22 @@
+.container {
+  padding: 32px;
+  color: black;
+}
+
+.container.skyblue {
+  background-color: skyblue;
+}
+
+.container.darkred {
+  background-color: darkred;
+  color: whitesmoke;
+}
+
+.goldColor {
+  background-color: gold;
+}
+
+.crimsonColor {
+  background-color: crimson;
+  color: whitesmoke;
+}
