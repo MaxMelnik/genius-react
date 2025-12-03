@@ -11,3 +11,8 @@ export const addContact = async (payload) => {
   const response = await axios.post("/contacts", payload);
   return response.data;
 };
+
+export const getSingleContact = async (id) => {
+  const response = await axios.get(`/contacts/${id}`);
+  return response.data;
+};
