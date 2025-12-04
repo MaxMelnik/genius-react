@@ -9,6 +9,9 @@ import { Route, Routes, Link, Navigate } from "react-router-dom";
 import NotFound from "./pages/not-found";
 import Layout from "./components/Layouts/Layout";
 import PrivateRoutes from "./components/PrivateRoutes/PrivateRoutes";
+import Logout from "./pages/logout";
+import Login from "./pages/login";
+import { AuthContext } from "./context/AuthContext";
 
 const Home = lazy(() => import("./pages/home"));
 const About = lazy(() => import("./pages/about"));
@@ -16,37 +19,50 @@ const Contacts = lazy(() => import("./pages/contacts"));
 const SingleContact = lazy(() => import("./pages/singleContact"));
 
 function App() {
-  const isAuthorized = true;
+  const [isAuthorized, setIsAuthorized] = useState(
+    !!localStorage.getItem("email")
+  );
 
   return (
     <>
       <main>
-        <Suspense fallback={<Loader />}>
-          <Routes>
-            <Route path="/" element={<Layout />}>
-              <Route index element={<Home />} />
-              <Route
-                path="/contacts"
-                element={
-                  <PrivateRoutes isAllowed={isAuthorized}>
-                    <Contacts />
-                  </PrivateRoutes>
-                }
-              />
-              <Route
-                path="/contacts/:id"
-                element={
-                  <PrivateRoutes isAllowed={isAuthorized}>
-                    <SingleContact />
-                  </PrivateRoutes>
-                }
-              />
-              <Route path="/about" element={<About />} />
-              <Route path="/404" element={<NotFound />} />
-              <Route path="*" element={<Navigate to="/404" />} />
-            </Route>
-          </Routes>
-        </Suspense>
+        <AuthContext.Provider value={{ isAuthorized, setIsAuthorized }}>
+          <Suspense fallback={<Loader />}>
+            <Routes>
+              <Route path="/" element={<Layout isAuthorized={isAuthorized} />}>
+                <Route index element={<Home />} />
+                <Route
+                  path="/contacts"
+                  element={
+                    <PrivateRoutes isAllowed={isAuthorized}>
+                      <Contacts />
+                    </PrivateRoutes>
+                  }
+                />
+                <Route
+                  path="/contacts/:id"
+                  element={
+                    <PrivateRoutes isAllowed={isAuthorized}>
+                      <SingleContact />
+                    </PrivateRoutes>
+                  }
+                />
+                <Route path="/about" element={<About />} />
+                <Route path="/login" element={<Login />} />
+                <Route
+                  path="/logout"
+                  element={
+                    <PrivateRoutes isAllowed={isAuthorized}>
+                      <Logout />
+                    </PrivateRoutes>
+                  }
+                />
+                <Route path="/404" element={<NotFound />} />
+                <Route path="*" element={<Navigate to="/404" />} />
+              </Route>
+            </Routes>
+          </Suspense>
+        </AuthContext.Provider>
       </main>
     </>
   );

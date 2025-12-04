@@ -5,6 +5,7 @@ import Loader from "../../components/Loader";
 
 const SingleContact = () => {
   const { id } = useParams();
+
   const { data, isFetching } = useQuery({
     queryKey: ["singleContact"],
     queryFn: () => getSingleContact(id),
