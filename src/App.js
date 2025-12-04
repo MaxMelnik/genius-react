@@ -12,6 +12,8 @@ import PrivateRoutes from "./components/PrivateRoutes/PrivateRoutes";
 import Logout from "./pages/logout";
 import Login from "./pages/login";
 import { AuthContext } from "./context/AuthContext";
+import { useDispatch } from "react-redux";
+import { fetchUsers } from "./redux/users/usersActions";
 
 const Home = lazy(() => import("./pages/home"));
 const About = lazy(() => import("./pages/about"));
@@ -22,6 +24,12 @@ function App() {
   const [isAuthorized, setIsAuthorized] = useState(
     !!localStorage.getItem("email")
   );
+
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(fetchUsers());
+  }, [dispatch]);
 
   return (
     <>
